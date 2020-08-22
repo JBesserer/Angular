@@ -1,0 +1,23 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <div class="header-wrapper">
+        <span>TemData</span>
+        <mat-form-field appearance="standard">
+          <input type="text"
+           placeholder="Find a TemTem"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           (input)='searchElement($event.target.value)'>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)='searchElement($event.option.value)'>
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

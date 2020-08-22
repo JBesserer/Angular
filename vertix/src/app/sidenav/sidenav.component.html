@@ -1,0 +1,10 @@
+<mat-drawer-container class="docs-component-viewer-nav-content sidenav-wrapper ">
+    <mat-drawer class="mat-drawer sidenav-drawer" mode="side" opened>
+        <mat-nav-list>
+            <a mat-list-item href="/neutral" *ngFor="let link of links"> {{ link }} </a>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content class="sidenav-content">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
