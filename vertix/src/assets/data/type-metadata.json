@@ -1,0 +1,232 @@
+{
+    "id": "5",
+    "name": "Earth",
+    "specificCode": "earth",
+    "description": "Earth Temtem are fairly unknown outside their habitat in the western Kisiwan deserts. They tend to be robust, heavy creatures and are fearless in battle.",
+    "effectiveTypes": 
+    [ 
+        {
+            "id": "1",
+            "name": "Fire",
+            "specificCode": "fire"
+        },
+        {
+            "id": "4",
+            "name": "Electric",
+            "specificCode": "electric"
+        },
+        {
+            "id": "10",
+            "name": "Crystal",
+            "specificCode": "crystal"
+        }
+    ],
+    "ineffectiveTypes": 
+    [ 
+        {
+            "id": "2",
+            "name": "Water",
+            "specificCode": "water"
+        },
+        {
+            "id": "3",
+            "name": "Nature",
+            "specificCode": "nature"
+        },
+        {
+            "id": "7",
+            "name": "Wind",
+            "specificCode": "wind"
+        }
+    ],
+    "resistantTypes": 
+    [ 
+        {
+            "id": "1",
+            "name": "Fire",
+            "specificCode": "fire"
+        },
+        {
+            "id": "4",
+            "name": "Electric",
+            "specificCode": "electric"
+        },
+        {
+            "id": "10",
+            "name": "Crystal",
+            "specificCode": "crystal"
+        },
+        {
+            "id": "11",
+            "name": "Toxic",
+            "specificCode": "toxic"
+        }
+    ],
+    "weakTypes": 
+    [ 
+        {
+            "id": "2",
+            "name": "Water",
+            "specificCode": "water"
+        },
+        {
+            "id": "3",
+            "name": "Nature",
+            "specificCode": "nature"
+        },
+        {
+            "id": "9",
+            "name": "Melee",
+            "specificCode": "melee"
+        }
+    ],
+    "areas": 
+    [ 
+        {
+            "id": "1",
+            "name": "Kisiwan",
+            "specificCode": "kisiwan"
+        }
+    ],
+    "temtems": 
+    [ 
+        {
+            "id": "21",
+            "name": "Bunbun",
+            "types": 
+            [ 
+                {
+                    "id": "5",
+                    "name": "Earth",
+                    "specificCode": "earth"
+                },
+                {
+                    "id": "10",
+                    "name": "Crystal",
+                    "specificCode": "crystal"
+                }
+            ],
+            "baseStats": {
+                "hp": 72,
+                "sta": 40,
+                "spd": 69,
+                "atk": 50,
+                "def": 36,
+                "spatk": 64,
+                "spdef": 43
+            }
+        },
+        {
+            "id": "22",
+            "name": "Mudrid",
+            "types": 
+            [ 
+                {
+                    "id": "5",
+                    "name": "Earth",
+                    "specificCode": "earth"
+                },
+                {
+                    "id": "10",
+                    "name": "Crystal",
+                    "specificCode": "crystal"
+                }
+            ],
+            "baseStats": {
+                "hp": 85,
+                "sta": 44,
+                "spd": 95,
+                "atk": 60,
+                "def": 42,
+                "spatk": 80,
+                "spdef": 50
+            }
+        }
+    ],
+    "techniques":
+    [
+        {
+            "id": "TC002",
+            "name": "Stone Wall",
+            "type": {
+                "id": "5",
+                "name": "Earth",
+                "specificCode": "earth"
+            },
+            "synergy": null,
+            "category": {
+                "id": "2",
+                "name": "Status",
+                "description": "non-damaging techniques that modify battle conditions like lowering stats or inflict conditions such as Sleep."
+            },
+            "damage": null,
+            "stamina": 18,
+            "hold": 1,
+            "priority": 1
+        },
+        {
+            "id": "TC025",
+            "name": "Drought",
+            "type": {
+                "id": "5",
+                "name": "Earth",
+                "specificCode": "earth"
+            },
+            "synergy": null,
+            "category": {
+                "id": "2",
+                "name": "Status",
+                "description": "non-damaging techniques that modify battle conditions like lowering stats or inflict conditions such as Sleep."
+            },
+            "damage": null,
+            "stamina": 14,
+            "hold": 1,
+            "priority": 1
+        },
+        {
+            "id": "TC026",
+            "name": "Toughen",
+            "type": {
+                "id": "5",
+                "name": "Earth",
+                "specificCode": "earth"
+            },
+            "synergy": null,
+            "category": {
+                "id": "2",
+                "name": "Status",
+                "description": "non-damaging techniques that modify battle conditions like lowering stats or inflict conditions such as Sleep."
+            },
+            "damage": null,
+            "stamina": 15,
+            "hold": 1,
+            "priority": 2
+        },
+        {
+            "id": "TC024",
+            "name": "Quicksand",
+            "type": {
+                "id": "5",
+                "name": "Earth",
+                "specificCode": "earth"
+            },
+            "synergy": {
+                "type": {
+                    "id": "7",
+                    "name": "Wind",
+                    "specificCode": "wind"
+                },
+                "description": "Only affects enemy team"
+            },
+            "category": {
+                "id": "2",
+                "name": "Status",
+                "description": "non-damaging techniques that modify battle conditions like lowering stats or inflict conditions such as Sleep."
+            },
+            "damage": null,
+            "stamina": 15,
+            "hold": 1,
+            "priority": 2
+        }
+    ]   
+}
