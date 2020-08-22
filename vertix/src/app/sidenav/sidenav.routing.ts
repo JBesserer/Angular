@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NeutralComponent } from './neutral/neutral.component';
 import { SidenavComponent } from './sidenav.component';
+import { TypeComponent } from './type/type.component';
 
 const routes: Routes = [
     {
@@ -9,8 +9,8 @@ const routes: Routes = [
       component: SidenavComponent,
       children: [
         {
-          path: 'neutral',
-          component: NeutralComponent
+          path: 'type/:typeCode',
+          component: TypeComponent
         }
       ]
     }

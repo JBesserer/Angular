@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from './sidenav.component';
-import { NeutralComponent } from './neutral/neutral.component';
+import { TypeComponent } from './type/type.component';
 import { SidenavRoutingModule } from '../sidenav/sidenav.routing';
 import { MaterialModule } from '../material-module';
 
 
 @NgModule({
-  declarations: [SidenavComponent, NeutralComponent],
+  declarations: [SidenavComponent, TypeComponent],
   imports: [
     CommonModule,
     SidenavRoutingModule,

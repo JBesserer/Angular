@@ -1,7 +1,7 @@
 <mat-drawer-container class="docs-component-viewer-nav-content sidenav-wrapper ">
     <mat-drawer class="mat-drawer sidenav-drawer" mode="side" opened>
         <mat-nav-list>
-            <a mat-list-item href="/neutral" *ngFor="let link of links"> {{ link }} </a>
+            <a mat-list-item href="/type/{{link.getSpecificCode()}}" [routerLinkActive]="['docs-component-viewer-sidenav-item-selected']" *ngFor="let link of links"> {{ link.getName() }} </a>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content class="sidenav-content">
