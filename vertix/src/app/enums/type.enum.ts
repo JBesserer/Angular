@@ -1,6 +1,14 @@
-enum TypeEnum {
-    EARTH = 'earth',
-    Down = 'DOWN',
-    Left = 'LEFT',
-    Right = 'RIGHT'
-  }
+export enum TypeEnum {
+    NEUTRAL = 'Neutral',
+    FIRE = 'Fire',
+    WATER = 'Water',
+    NATURE = 'Nature',
+    ELECTRIC = 'Electric',
+    EARTH = 'Earth',
+    MENTAL = 'Mental',
+    WIND = 'Wind',
+    DIGITAL = 'Digital',
+    MELEE = 'Melee',
+    CRYSTAL = 'Crystal',
+    TOXIC = 'Toxic'
+}

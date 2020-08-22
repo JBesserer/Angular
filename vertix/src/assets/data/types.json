@@ -1,0 +1,62 @@
+[
+    {
+        "id": "0",
+        "name": "Neutral",
+        "specificCode": "neutral"
+    },
+    {
+        "id": "1",
+        "name": "Fire",
+        "specificCode": "fire"
+    },
+    {
+        "id": "2",
+        "name": "Water",
+        "specificCode": "water"
+    },
+    {
+        "id": "3",
+        "name": "Nature",
+        "specificCode": "nature"
+    },
+    {
+        "id": "4",
+        "name": "Electric",
+        "specificCode": "electric"
+    },
+    {
+        "id": "5",
+        "name": "Earth",
+        "specificCode": "earth"
+    },
+    {
+        "id": "6",
+        "name": "Mental",
+        "specificCode": "mental"
+    },
+    {
+        "id": "7",
+        "name": "Wind",
+        "specificCode": "wind"
+    },
+    {
+        "id": "8",
+        "name": "Digital",
+        "specificCode": "digital"
+    },
+    {
+        "id": "9",
+        "name": "Melee",
+        "specificCode": "melee"
+    },
+    {
+        "id": "10",
+        "name": "Crystal",
+        "specificCode": "crystal"
+    },
+    {
+        "id": "11",
+        "name": "Toxic",
+        "specificCode": "toxic"
+    }
+]

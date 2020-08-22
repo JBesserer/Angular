@@ -1,7 +1,7 @@
-<mat-drawer-container class="docs-component-viewer-nav-content sidenav-wrapper ">
+<mat-drawer-container *ngIf="types$ | async as types"class="docs-component-viewer-nav-content sidenav-wrapper ">
     <mat-drawer class="mat-drawer sidenav-drawer" mode="side" opened>
         <mat-nav-list>
-            <a mat-list-item href="/type/{{link.getSpecificCode()}}" [routerLinkActive]="['docs-component-viewer-sidenav-item-selected']" *ngFor="let link of links"> {{ link.getName() }} </a>
+            <a mat-list-item routerLink="/type/{{type.name}}" routerLinkActive="active-list-item" *ngFor="let type of types"> <img class="type" src="{{ type.icon | addApiUrlPipe }}">{{ type.name }}</a>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content class="sidenav-content">

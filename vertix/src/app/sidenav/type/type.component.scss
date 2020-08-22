@@ -1,0 +1,16 @@
+.temtem-table {
+    padding-top: 25px;
+}
+
+table {
+    width: 100%;
+}
+
+.base-stats-header, .temtem-table-name{
+    text-align: center !important;
+}
+
+.mat-row:hover {
+    background: rgba(233,30,99,.15);
+    color: #f492b4;
+}
