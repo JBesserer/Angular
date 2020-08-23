@@ -78,8 +78,8 @@ export class TypeComponent implements OnInit, OnDestroy {
       this.addCurrentTypeWeakness(TypeEnum.NEUTRAL, weakness.Neutral, types);
       this.addCurrentTypeWeakness(TypeEnum.TOXIC, weakness.Toxic, types);
       this.addCurrentTypeWeakness(TypeEnum.WATER, weakness.Water, types);
-      this.addCurrentTypeWeakness(TypeEnum.WIND, weakness.Wind, types);
-    } else {
+      this.addCurrentTypeWeakness(TypeEnum.WIND, weakness.Wind, types); 
+    } else { //Receiving end of damage
       switch (routeType) {
         case TypeEnum.CRYSTAL: {
             this.addReceivingWeakness(weaknessType, weakness.Crystal, types);
