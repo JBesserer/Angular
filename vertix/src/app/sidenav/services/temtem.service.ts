@@ -12,10 +12,7 @@ export class TemtemService {
     url = 'api/temtems';
   constructor(private http: HttpClient) { }
 
-  getTemtems(typeName: string): Observable<Array<Temtem>>{
-    console.log(typeName);
-    return this.http.get<Array<Temtem>>(environment.apiBaseUrl + this.url).pipe(
-      map(temtems => temtems.filter( temtem => temtem.types.includes(typeName)))
-    );
+  getTemtems(): Observable<Array<Temtem>>{
+    return this.http.get<Array<Temtem>>(environment.apiBaseUrl + this.url);
   }
 }

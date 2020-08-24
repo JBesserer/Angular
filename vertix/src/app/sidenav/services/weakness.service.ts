@@ -15,10 +15,4 @@ export class WeaknessService {
     getWeaknesses(): Observable<Map<string, Weakness>>{
         return this.http.get<Map<string, Weakness>>(environment.apiBaseUrl + this.url);
     }
-
-    getWeaknessForType(typeKey: string): Observable<Weakness>{
-        return this.http.get<Map<string, Weakness>>(environment.apiBaseUrl + this.url).pipe(
-            map(mapReturn => mapReturn[typeKey])
-        );
-    }
 }

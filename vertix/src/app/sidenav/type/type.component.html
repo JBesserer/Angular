@@ -3,7 +3,7 @@
         <h1>{{this.type}} Type</h1>
         <mat-divider></mat-divider>
     </div>
-    <div>
+    <div class="type-description-section">
         <p>The <b>{{this.type}} Type</b> is one of the types that Temtem may have. 
             It's techniques are very effective against 
             <span *ngFor="let effectiveType of effectiveTypes; let last = last">
@@ -29,7 +29,7 @@
         <mat-divider></mat-divider>
     </div>
     <div class="temtem-table" *ngIf="temtems$ | async as temtems">
-        <table mat-table [dataSource]="temtems" matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="temtems" matSort (matSortChange)="sortData($event)"class="mat-elevation-z8">
             <!-- Id Column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2" mat-sort-header>No.</th>
@@ -38,13 +38,22 @@
             <!-- Name Column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2" mat-sort-header>Temtem</th>
-                <td mat-cell *matCellDef="let element"><img class="temtem-table-icon" src="{{ element.icon | addApiUrlPipe }}"><span class="temtem-table-name">{{element.name}}</span></td>
+                <td mat-cell *matCellDef="let element">
+                    <a class="stripped-link-visible" routerLink="/temtem/{{element.number}}">
+                        <img class="temtem-table-icon" src="{{ element.icon | addApiUrlPipe }}">
+                        <span class="temtem-table-name">
+                            {{element.name}} 
+                        </span>
+                    </a>
+                </td>
             </ng-container>
             <!-- Types Column -->
             <ng-container matColumnDef="types">
-                <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2" mat-sort-header >Type(s)</th>
+                <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">Type(s)</th>
                 <td mat-cell *matCellDef="let element">
-                    <span *ngFor="let type of element.types"> {{type}}</span>
+                    <span *ngFor="let type of element.types"> 
+                        <img class="type" src="{{this.findIcon(type, this.types) | addApiUrlPipe}}" title="{{type}}">
+                    </span>
                 </td>
             </ng-container>
             <!-- Base Stats Header Column -->
@@ -98,4 +107,11 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>     
+    <div>
+        <h1>{{this.type}} Techniques</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="temtem-table">
+        <app-technique-table [datasource$]="techniques$" [types]="types"></app-technique-table>
+    </div>
 </div>

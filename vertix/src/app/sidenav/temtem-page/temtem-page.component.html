@@ -1,0 +1,31 @@
+<div *ngIf="temtem$ | async as temtem"> 
+    <div>
+        <h1>{{temtem.name}}</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="content-header">
+        <h1>Appearance and Personality</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="description-content-section">
+        <div class="description-content-section-main">
+            <p>{{temtem.gameDescription}}</p>
+            <p>{{temtem.types}}</p>
+        </div>
+        <div class="description-content-section-side">
+            <span class="temtem-portrait-background"><img class="temtem-page-icon" src="{{ temtem.icon | addApiUrlPipe }}"></span>
+        </div>
+    </div>
+    <div style="display: block; width: 70%">
+        <canvas baseChart
+          [datasets]="radarChartData"
+          [options]="radarChartOptions"
+          [labels]="radarChartLabels"
+          [chartType]="radarChartType">
+        </canvas>
+    </div>
+    <mat-button-toggle-group  name="fontStyle" aria-label="Font Style" value="average">
+        <mat-button-toggle #buttonToggle (click)="this.averageForAll()" value="average" s>Average</mat-button-toggle>
+        <mat-button-toggle (click)="this.averageForType()" value="averageForType">Average For Type</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>

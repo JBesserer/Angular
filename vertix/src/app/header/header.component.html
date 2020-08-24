@@ -10,11 +10,13 @@
            matInput
            [formControl]="myControl"
            [matAutocomplete]="auto"
-           (input)='searchElement($event.target.value)'>
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)='searchElement($event.option.value)'>
-            <mat-option *ngFor="let option of options" [value]="option">
-              {{option}}
-            </mat-option>
+           (input)='_filter($event.target.value)'>
+          <mat-autocomplete (optionSelected)='selected($event.option.value)' #auto="matAutocomplete">
+            <a class="stripped-link-visible" routerLink="/temtem/{{option.number}}" *ngFor="let option of filteredOptions$ | async">
+              <mat-option  [value]="option">
+                {{option.name}}
+              </mat-option>
+            </a>
           </mat-autocomplete>
         </mat-form-field>
       </div>
