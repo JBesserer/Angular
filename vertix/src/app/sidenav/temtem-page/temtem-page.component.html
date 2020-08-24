@@ -1,0 +1,26 @@
+<div *ngIf="temtem$ | async as temtem"> 
+    <div>
+        <h1>{{temtem.name}}</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="content-header">
+        <h1>Appearance and Personality</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="description-content-section">
+        <div class="description-content-section-main">
+            <p>{{temtem.gameDescription}}</p>
+        </div>
+        <div class="description-content-section-side">
+            image stuff stuff
+        </div>
+    </div>
+    <div style="display: block; width: 70%">
+        <canvas baseChart
+          [datasets]="radarChartData"
+          [options]="radarChartOptions"
+          [labels]="radarChartLabels"
+          [chartType]="radarChartType">
+        </canvas>
+    </div>
+</div>

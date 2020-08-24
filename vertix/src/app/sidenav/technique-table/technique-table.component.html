@@ -1,0 +1,38 @@
+<div *ngIf="datasource$ | async as datasource">
+    <table mat-table [dataSource]="datasource" matSort (matSortChange)="sortData($event)"class="mat-elevation-z8">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+        <!-- Types Column -->
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+            <td mat-cell *matCellDef="let element"><img class="type" src="{{this.findIcon(element.type, this.types) | addApiUrlPipe}}" title="{{element.type}}"></td>
+        </ng-container>
+        <!-- Damage Header Column -->
+        <ng-container matColumnDef="dmg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>DMG</th>
+            <td mat-cell *matCellDef="let element">{{element.damage}}</td>
+        </ng-container>
+        <!-- Stamina Header Column -->
+        <ng-container matColumnDef="sta">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>STA</th>
+            <td mat-cell *matCellDef="let element">{{element.staminaCost}}</td>
+        </ng-container>
+        <!-- Hold Header Column -->
+        <ng-container matColumnDef="hold">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Hold</th>
+            <td mat-cell *matCellDef="let element">{{element.hold}}</td>
+        </ng-container>
+        <!-- Priority Header Column -->
+        <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+            <td mat-cell *matCellDef="let element"><img class="priority" src="{{ element.priorityIcon | addApiUrlPipe}}" title="{{element.priority}}"></td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+

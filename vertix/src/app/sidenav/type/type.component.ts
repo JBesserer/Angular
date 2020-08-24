@@ -1,17 +1,20 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { TypeService } from '../services/type.service';
-import { TypeMetadata } from 'src/app/models/type-metadata.model';
-import { Observable, Subscription, combineLatest, of, forkJoin } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
+import { Observable, Subscription, combineLatest} from 'rxjs';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Weakness } from 'src/app/models/weakness.model';
-import { map, mergeMap, concatMap, concat } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom, filter} from 'rxjs/operators';
 import { WeaknessService } from '../services/weakness.service';
 import { Type } from 'src/app/models/type.model';
 import { TypeEnum } from '../../enums/type.enum';
-import { stringify } from '@angular/compiler/src/util';
-import { TemtemService } from '../services/temtem.service';
 import { Temtem } from 'src/app/models/temtem.model';
+import { IAppState } from 'src/app/store/states/app.state';
+import { Store } from '@ngrx/store';
+import { selectTemtemListForType, selectTemtemList } from 'src/app/store/selectors/temtem.selectors';
+import { selectTypesList } from 'src/app/store/selectors/type.selectors';
+import { selectWeaknessList } from 'src/app/store/selectors/weakness.selectors';
+import { selectTechniqueListForType, selectTechniqueList } from 'src/app/store/selectors/technique.selectors';
+import { Technique } from 'src/app/models/technique.model';
 
 @Component({
   selector: 'app-type',
@@ -20,38 +23,38 @@ import { Temtem } from 'src/app/models/temtem.model';
 })
 export class TypeComponent implements OnInit, OnDestroy {
   temtems$: Observable<Array<Temtem>>;
+  techniques$: Observable<Array<Technique>>;
   effectiveTypes: Array<Type> = new Array<Type>();
   ineffectiveTypes: Array<Type> = new Array<Type>();
   resistantTypes: Array<Type> = new Array<Type>();
   weakTypes: Array<Type> = new Array<Type>();
   type: string;
+  types: Array<Type> = new Array<Type>();
   subscriptions: Subscription;
   displayedColumns: string[] = ['id', 'name', 'types', 'hp', 'sta', 'spd', 'atk', 'def', 'spatk', 'spdef', 'total'];
-
-  // types$: Observable<Array<Type>>;
-  // weaknesses$: Observable<Map<string, Weakness>>;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private route: ActivatedRoute,
-              private typeService: TypeService,
-              private weaknessService: WeaknessService,
-              private temtemService: TemtemService) { }
+              private store: Store<IAppState>) { }
 
   ngOnInit(): void {
+    this.techniques$ = this.route.params.pipe(
+      switchMap((params) => this.store.select(selectTechniqueListForType, {type: params.typeCode}))
+    );
     this.subscriptions = combineLatest([
-      this.typeService.getTypes(),
-      this.weaknessService.getWeaknesses(),
+      this.store.select(selectTypesList),
+      this.store.select(selectWeaknessList).pipe(filter(weakness => weakness !== null)),
       this.route.params
     ]).subscribe(([types, weaknesses, params]: [Array<Type>, Map<string, Weakness>, Params]) => {
       this.resetTypes();
+      this.types = types;
       this.type = params.typeCode;
       this.setupTypes(types, weaknesses, params.typeCode);
-      console.log(this.weakTypes);
     });
-    this.route.params.subscribe((params: Params) => {
-      this.temtems$ = this.temtemService.getTemtems(params.typeCode);
-    });
+    this.temtems$ = this.route.params.pipe(
+      switchMap((params) => this.store.select(selectTemtemListForType, {type: params.typeCode}))
+    );
   }
 
   ngOnDestroy(): void {
@@ -78,8 +81,8 @@ export class TypeComponent implements OnInit, OnDestroy {
       this.addCurrentTypeWeakness(TypeEnum.NEUTRAL, weakness.Neutral, types);
       this.addCurrentTypeWeakness(TypeEnum.TOXIC, weakness.Toxic, types);
       this.addCurrentTypeWeakness(TypeEnum.WATER, weakness.Water, types);
-      this.addCurrentTypeWeakness(TypeEnum.WIND, weakness.Wind, types); 
-    } else { //Receiving end of damage
+      this.addCurrentTypeWeakness(TypeEnum.WIND, weakness.Wind, types);
+    } else { // Receiving end of damage
       switch (routeType) {
         case TypeEnum.CRYSTAL: {
             this.addReceivingWeakness(weaknessType, weakness.Crystal, types);
@@ -153,7 +156,7 @@ export class TypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  private findIcon(weaknessType: string, types: Array<Type>): string {
+  findIcon(weaknessType: string, types: Array<Type>): string {
     let iconValue: string;
     types.forEach(type => {
       if (type.name === weaknessType){
@@ -168,5 +171,31 @@ export class TypeComponent implements OnInit, OnDestroy {
     this.ineffectiveTypes = new Array<Type>();
     this.resistantTypes = new Array<Type>();
     this.weakTypes = new Array<Type>();
+    this.types = new Array<Type>();
+  }
+
+  sortData(sort: Sort): void {
+    function compare(a: number | string, b: number | string, isAsc: boolean): number {
+      return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    }
+    this.temtems$ = this.temtems$.pipe(
+      map(temtems => temtems.sort((a, b) => {
+        let isAsc = sort.direction === 'asc';
+        if (sort.direction === '') { sort.active = 'id'; isAsc = true; }
+        switch (sort.active) {
+          case 'id': return compare(a.number, b.number, isAsc);
+          case 'name': return compare(a.name, b.name, isAsc);
+          case 'hp': return compare(a.stats.hp, b.stats.hp, isAsc);
+          case 'sta': return compare(a.stats.sta, b.stats.sta, isAsc);
+          case 'spd': return compare(a.stats.spd, b.stats.spd, isAsc);
+          case 'atk': return compare(a.stats.atk, b.stats.atk, isAsc);
+          case 'def': return compare(a.stats.def, b.stats.def, isAsc);
+          case 'spatk': return compare(a.stats.spatk, b.stats.spatk, isAsc);
+          case 'spdef': return compare(a.stats.spdef, b.stats.spdef, isAsc);
+          case 'total': return compare(a.stats.total, b.stats.total, isAsc);
+          default: return 0;
+        }
+      }))
+    );
   }
 }

@@ -12,10 +12,6 @@ export class TypeService {
   url = 'api/types';
   constructor(private http: HttpClient) { }
 
-  getTypeMetadata(): Observable<TypeMetadata>{
-    return this.http.get<TypeMetadata>(this.typeMetadataUrl);
-  }
-
   getTypes(): Observable<Array<Type>> {
     return this.http.get<Array<Type>>(environment.apiBaseUrl + this.url);
   }

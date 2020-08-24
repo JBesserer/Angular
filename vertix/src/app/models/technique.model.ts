@@ -1,71 +1,37 @@
-import { Type } from './type.model';
-import { Category } from './category.model';
-import { Synergy } from './synergy.model';
-
 export class Technique {
-    id: string;
     name: string;
-    type: Type;
-    synergy: Synergy;
-    category: Category;
+    type: string;
+    wikiUrl: string;
+    synergy: string;
     damage: number;
-    stamina: number;
+    staminaCost: number;
     hold: number;
-    priority: number;
+    priority: string;
+    priorityIcon: string;
+    targets: string;
+    description: string;
 
-    constructor(id: string,
-                name: string,
-                type: Type,
-                synergy: Synergy,
-                category: Category,
+    constructor(name: string, 
+                type: string,
+                wikiUrl: string,
+                synergy: string,
                 damage: number,
-                stamina: number,
+                staminaCost: number,
                 hold: number,
-                priority: number) {
-      this.id = id;
-      this.name = name;
-      this.type = type;
-      this.synergy = synergy;
-      this.category = category;
-      this.damage = damage;
-      this.stamina = stamina;
-      this.hold = hold;
-      this.priority = priority;
-    }
-
-    getId(): string {
-      return this.id;
-    }
-
-    getName(): string {
-        return this.name;
-    }
-
-    getType(): Type {
-        return this.type;
-    }
-
-    getSynergy(): Synergy {
-        return this.synergy;
-    }
-
-    getCategory(): Category {
-        return this.category;
-    }
-
-    getDamage(): number {
-        return this.damage;
-    }
-
-    getStamina(): number {
-        return this.stamina;
-    }
-
-    getHold(): number {
-        return this.hold;
-    }
-
-    getPriority(): number {
-        return this.priority;
+                priority: string,
+                priorityIcon: string,
+                targets: string,
+                description: string) {
+        this.name = name;
+        this.type = type;
+        this.wikiUrl = wikiUrl;
+        this.synergy = synergy;
+        this.damage = damage;
+        this.staminaCost = staminaCost;
+        this.hold = hold;
+        this.priority = priority;
+        this.priorityIcon = priorityIcon;
+        this.targets = targets;
+        this.description = description;
     }
 }

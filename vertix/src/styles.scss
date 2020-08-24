@@ -8,14 +8,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff;
 }
 
+.stripped-link-visible {
+    text-decoration: none;
+    color: #fff;
+}
+
+.stripped-link-visible:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
 .type {
     width: 25px;
     height: 25px;
     padding-right: 2px;
+    vertical-align: middle;
+}
+
+.priority {
+    height: 25px;
+    padding-right: 2px;
+    vertical-align: middle;
 }
 
 .temtem-table-icon {
     width: 50px;
     height: 50px;
-    padding-top: 10px;
+    vertical-align: middle;
 }
