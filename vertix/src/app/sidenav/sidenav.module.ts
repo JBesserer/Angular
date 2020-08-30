@@ -17,11 +17,11 @@ import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
-    SidenavComponent, 
-    TypeComponent, 
+    SidenavComponent,
+    TypeComponent,
     TechniqueTableComponent,
     TemtemPageComponent,
-    SumPipe, 
+    SumPipe,
     AddApiUrlPipe],
   imports: [
     CommonModule,
